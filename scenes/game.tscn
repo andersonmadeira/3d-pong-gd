@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh8wwbvjdhxqj"]
+[gd_scene load_steps=16 format=3 uid="uid://bh8wwbvjdhxqj"]
 
 [ext_resource type="PackedScene" uid="uid://ddxfgti0l485o" path="res://scenes/paddle.tscn" id="1_4guxq"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_beint"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_sdrpa"]
+[ext_resource type="Script" path="res://scenes/ball.gd" id="2_8mrv3"]
 [ext_resource type="Material" uid="uid://dqyrnk2rssj8" path="res://materials/white_material.tres" id="2_ed052"]
 [ext_resource type="Material" uid="uid://4oeq23eefftj" path="res://scenes/gray_material.tres" id="3_8xjim"]
+[ext_resource type="PackedScene" uid="uid://blo0h8pymkyiw" path="res://scenes/score_area.tscn" id="6_jmqs8"]
 
 [sub_resource type="Sky" id="Sky_lpvbp"]
 
@@ -17,6 +20,16 @@ glow_intensity = 8.0
 glow_strength = 0.52
 glow_bloom = 1.0
 
+[sub_resource type="SphereMesh" id="SphereMesh_vemqe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqvys"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4g8o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6rryo"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjfsb"]
 albedo_color = Color(0.0475577, 0.0475576, 0.0475576, 1)
 metallic = 0.74
@@ -26,6 +39,7 @@ metallic_specular = 0.23
 size = Vector3(1, 0.1, 1)
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_sdrpa")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lidns")
@@ -51,6 +65,24 @@ fov = 40.0
 
 [node name="Level" type="Node3D" parent="."]
 
+[node name="Ball" type="CharacterBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_8mrv3")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="Level/Ball"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+visible = false
+mesh = SubResource("SphereMesh_vemqe")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rqvys")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Ball"]
+shape = SubResource("BoxShape3D_e4g8o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Ball"]
+mesh = SubResource("BoxMesh_6rryo")
+surface_material_override/0 = ExtResource("2_ed052")
+
 [node name="Paddle1" parent="Level" instance=ExtResource("1_4guxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 24)
 
@@ -59,11 +91,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -24)
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, 0)
+use_collision = true
 size = Vector3(1, 1, 48)
 material = ExtResource("2_ed052")
 
 [node name="Wall2" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.5, 0)
+use_collision = true
 size = Vector3(1, 1, 48)
 material = ExtResource("2_ed052")
 
@@ -137,3 +171,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.05, 0)
 mesh = SubResource("BoxMesh_k6dxl")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_8xjim")
+
+[node name="ScoreArea" parent="Level" instance=ExtResource("6_jmqs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+
+[node name="ScoreArea2" parent="Level" instance=ExtResource("6_jmqs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+
+[connection signal="body_entered" from="Level/ScoreArea" to="." method="_on_score_area_body_entered"]
+[connection signal="body_entered" from="Level/ScoreArea2" to="." method="_on_score_area_body_entered"]
