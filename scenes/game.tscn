@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bh8wwbvjdhxqj"]
+[gd_scene load_steps=15 format=3 uid="uid://bh8wwbvjdhxqj"]
 
 [ext_resource type="PackedScene" uid="uid://ddxfgti0l485o" path="res://scenes/paddle.tscn" id="1_4guxq"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_beint"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scenes/ball.gd" id="2_8mrv3"]
 [ext_resource type="Material" uid="uid://dqyrnk2rssj8" path="res://materials/white_material.tres" id="2_ed052"]
 [ext_resource type="Material" uid="uid://4oeq23eefftj" path="res://scenes/gray_material.tres" id="3_8xjim"]
-[ext_resource type="PackedScene" uid="uid://blo0h8pymkyiw" path="res://scenes/score_area.tscn" id="6_jmqs8"]
 
 [sub_resource type="Sky" id="Sky_lpvbp"]
 
@@ -88,10 +87,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
 move_up_action = "p1_move_up"
 move_down_action = "p1_move_down"
 
+[node name="ScoreArea" parent="Level/Paddle1" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -25.5)
+
 [node name="Paddle2" parent="Level" instance=ExtResource("1_4guxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -23.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -23.5)
 move_up_action = "p2_move_up"
 move_down_action = "p2_move_down"
+
+[node name="ScoreArea" parent="Level/Paddle2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 25.5)
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, 0)
@@ -176,11 +181,5 @@ mesh = SubResource("BoxMesh_k6dxl")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_8xjim")
 
-[node name="ScoreArea" parent="Level" instance=ExtResource("6_jmqs8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
-
-[node name="ScoreArea2" parent="Level" instance=ExtResource("6_jmqs8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
-
-[connection signal="body_entered" from="Level/ScoreArea" to="." method="_on_score_area_body_entered"]
-[connection signal="body_entered" from="Level/ScoreArea2" to="." method="_on_score_area_body_entered"]
+[editable path="Level/Paddle1"]
+[editable path="Level/Paddle2"]

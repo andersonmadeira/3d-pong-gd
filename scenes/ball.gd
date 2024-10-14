@@ -3,7 +3,7 @@ class_name Ball
 
 @export var min_start_angle := 30.0
 @export var max_start_angle := 70.0
-@export var speed := 15.0
+@export var speed := 30.0
 
 @onready var debug_mesh: MeshInstance3D = $DebugMesh
 
@@ -45,3 +45,7 @@ func _physics_process(delta: float) -> void:
 	# If we collided with something, bounce off
 	if collision:
 		_velocity = _velocity.bounce(collision.get_normal())
+
+func destroy() -> void:
+	print('ah!!')
+	_reset()
