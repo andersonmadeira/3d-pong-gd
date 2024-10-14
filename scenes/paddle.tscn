@@ -2,7 +2,8 @@
 
 [ext_resource type="Material" uid="uid://dqyrnk2rssj8" path="res://materials/white_material.tres" id="1_mo886"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e4g8o"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_7m0m4"]
+size = Vector3(8, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b46pc"]
 size = Vector3(8, 1, 1)
@@ -11,7 +12,7 @@ size = Vector3(8, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_e4g8o")
+shape = SubResource("BoxShape3D_7m0m4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_b46pc")
