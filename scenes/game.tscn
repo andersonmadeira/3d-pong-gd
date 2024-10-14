@@ -84,10 +84,14 @@ mesh = SubResource("BoxMesh_6rryo")
 surface_material_override/0 = ExtResource("2_ed052")
 
 [node name="Paddle1" parent="Level" instance=ExtResource("1_4guxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
+move_up_action = "p1_move_up"
+move_down_action = "p1_move_down"
 
 [node name="Paddle2" parent="Level" instance=ExtResource("1_4guxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -23.5)
+move_up_action = "p2_move_up"
+move_down_action = "p2_move_down"
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, 0)
