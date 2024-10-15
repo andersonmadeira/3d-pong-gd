@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Paddle
 
-@onready var score_label: Label = $ScoreUI/SubViewport/Control/Label
+@onready var score_ui: ScoreUI = $ScoreUI
 
 @export var move_up_action: String = ''
 @export var move_down_action: String = ''
@@ -30,5 +30,5 @@ func get_movement_direction() -> int:
 
 func _on_score_area_body_entered(body: Node3D) -> void:
 	if body is Ball:
-		score_label.text = str(int(score_label.text) + 1)
+		score_ui.score = score_ui.score + 1
 		body.destroy()

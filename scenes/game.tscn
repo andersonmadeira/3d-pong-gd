@@ -91,7 +91,7 @@ move_down_action = "p1_move_down"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -25.5)
 
 [node name="ScoreUI" parent="Level/Paddle1" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 29.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 29)
 
 [node name="Paddle2" parent="Level" instance=ExtResource("1_4guxq")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -23.5)
@@ -102,7 +102,7 @@ move_down_action = "p2_move_down"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 25.5)
 
 [node name="ScoreUI" parent="Level/Paddle2" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -29.5)
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, 0)

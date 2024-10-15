@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://oh8kgo8pkwpt"]
+
+[ext_resource type="Script" path="res://scripts/score_ui.gd" id="1_pt6g4"]
+
+[sub_resource type="World3D" id="World3D_hpj52"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_65lek"]
+viewport_path = NodePath("SubViewport")
+
+[node name="ScoreUI" type="Node3D"]
+top_level = true
+script = ExtResource("1_pt6g4")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+world_3d = SubResource("World3D_hpj52")
+transparent_bg = true
+size = Vector2i(700, 500)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.226707, 0.226707, 0.226707, 1)
+theme_override_constants/outline_size = 50
+theme_override_constants/shadow_outline_size = 50
+theme_override_font_sizes/font_size = 600
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreUI" type="Sprite3D" parent="."]
+billboard = 1
+texture = SubResource("ViewportTexture_65lek")
