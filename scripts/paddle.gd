@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+class_name Paddle
 
 @export var move_up_action: String = ''
 @export var move_down_action: String = ''
@@ -25,3 +25,7 @@ func get_movement_direction() -> int:
 		return 1
 
 	return 0
+
+func _on_game_status_changed(status: Game.GameStatus) -> void:
+	var enabled = status == Game.GameStatus.Playing
+	process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED

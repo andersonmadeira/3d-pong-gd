@@ -47,8 +47,9 @@ colors = PackedColorArray(0.337255, 0.337255, 0.337255, 0.490196)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p3qfb"]
 gradient = SubResource("Gradient_jpvhw")
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("paddles")]
 script = ExtResource("1_sdrpa")
+paddles = [NodePath("Level/P1Paddle"), NodePath("Level/P2Paddle")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lidns")

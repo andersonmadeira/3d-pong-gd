@@ -6,6 +6,7 @@ enum GameStatus {Playing, Paused}
 signal status_changed(status: GameStatus)
 
 @export var win_score: int = 11
+@export var paddles: Array[Paddle]
 
 @onready var ball: Ball = $Level/Ball
 @onready var p1ScoreUI: ScoreUI = $Level/P1ScoreUI
@@ -14,10 +15,10 @@ signal status_changed(status: GameStatus)
 @onready var menuTitle: Label = $UserInterface/MainMenu/VBoxContainer/MenuTitle
 @onready var playButton: Button = $UserInterface/MainMenu/VBoxContainer/VBoxContainer/PlayButton
 
-static var _playing = true
-static var playing: int:
-	get:
-		return _playing
+func _ready() -> void:
+	for p in paddles:
+		p._on_game_status_changed(GameStatus.Paused)
+		status_changed.connect(p._on_game_status_changed)
 
 func _on_p_1_score_area_body_entered(body: Node3D) -> void:
 	if body is Ball:
@@ -41,9 +42,9 @@ func _on_p_2_score_area_body_entered(body: Node3D) -> void:
 		else:
 			body._reset()
 
-func _finish(player_id: String) -> void:
+func _finish(winner_id: String) -> void:
 	playButton.text = 'Play Again'
-	menuTitle.text = "%s WON!" % player_id
+	menuTitle.text = "%s WON!" % winner_id
 	ui.visible = true
 	status_changed.emit(GameStatus.Paused)
 

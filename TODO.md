@@ -10,6 +10,7 @@ Core:
 [x] Refactor Paddle and game components to be more decoupled
 [x] Make the game finish when someone scores 11
 [x] Game UI => Game Start, Game Over, Play Again
+[x] Disable paddles movement when game is paused
 
 Polish:
 
