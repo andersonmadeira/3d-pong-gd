@@ -10,19 +10,15 @@ class_name Ball
 var rand := RandomNumberGenerator.new()
 var _velocity := Vector3.ZERO
 
-func _ready() -> void:
-	_reset()
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("generate"):
 		_reset()
 
 ## Generates a random
 func _reset() -> void:
-	visible = true
-
-	global_position.z = 0
-	global_position.x = 0
+	# Wait a little before the ball starts moving again
+	# TODO: Show include a Countdown timer on the UI?
+	await get_tree().create_timer(1).timeout
 
 	# debug_mesh.global_position = _get_random_direction() * 5
 	var direction = _get_random_direction()
@@ -49,4 +45,9 @@ func _physics_process(delta: float) -> void:
 		_velocity = _velocity.bounce(collision.get_normal())
 
 func _destroy() -> void:
-	visible = false
+	# TODO: Explosion particles here 
+
+	_velocity = Vector3.ZERO
+
+	global_position.z = 0
+	global_position.x = 0

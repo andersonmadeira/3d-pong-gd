@@ -4,12 +4,16 @@ Core:
 [x] Make ball bounce when hitting the paddles or walls
 [x] Compute player scores when the ball hits score area
 [x] Create UI for the score
-[ ] Increase ball speed as it hits the paddles
-[ ] Make the game finish when someone scores 11
-[ ] Game UI => Game Start, Game Over, Play Again
+
+16 Aug
+
+[x] Refactor Paddle and game components to be more decoupled
+[x] Make the game finish when someone scores 11
+[x] Game UI => Game Start, Game Over, Play Again
 
 Polish:
 
+[ ] Increase ball speed as it hits the paddles
 [ ] Create a polished scenario / level inspired by a real (but stylized) pong game
 [ ] The score would be on a LED on the wall beside the paddle
 [ ] Simple particle effect when the ball hits the paddle

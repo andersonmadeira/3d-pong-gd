@@ -61,9 +61,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		yaw += -event.relative.x * mouse_sensitivity * dir_yaw
 		var dir_pitch = -1 if invert_y else 1
 		pitch += -event.relative.y * mouse_sensitivity * dir_pitch
-
-func _on_game_status_changed(status: Game.GameStatus) -> void:
-	var enabled = status == Game.GameStatus.Playing
-
-	set_process_input(enabled)
-	set_process(enabled)

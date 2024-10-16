@@ -97,7 +97,6 @@ surface_material_override/0 = ExtResource("2_ed052")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
 move_up_action = "p1_move_up"
 move_down_action = "p1_move_down"
-speed = null
 
 [node name="P1ScoreUI" parent="Level" instance=ExtResource("7_xrgop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 29.5)
@@ -110,7 +109,6 @@ top_level = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -23.5)
 move_up_action = "p2_move_up"
 move_down_action = "p2_move_down"
-speed = null
 
 [node name="P2ScoreUI" parent="Level" instance=ExtResource("7_xrgop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -30)
@@ -203,9 +201,8 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_8xjim")
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
-visible = false
 
-[node name="Control" type="Control" parent="UserInterface"]
+[node name="MainMenu" type="Control" parent="UserInterface"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,7 +211,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="TextureRect" type="TextureRect" parent="UserInterface/Control"]
+[node name="TextureRect" type="TextureRect" parent="UserInterface/MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,7 +220,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_p3qfb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainMenu"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -235,26 +232,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Space3" type="Control" parent="UserInterface/Control/VBoxContainer"]
+[node name="Space3" type="Control" parent="UserInterface/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="PlayerWonLabel" type="Label" parent="UserInterface/Control/VBoxContainer"]
+[node name="MenuTitle" type="Label" parent="UserInterface/MainMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Player % Won"
+text = "Pong"
+horizontal_alignment = 1
 
-[node name="Space" type="Control" parent="UserInterface/Control/VBoxContainer"]
+[node name="Space" type="Control" parent="UserInterface/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 mouse_filter = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/Control/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/MainMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayAgainButton" type="Button" parent="UserInterface/Control/VBoxContainer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="UserInterface/MainMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = ExtResource("7_6d356")
@@ -268,9 +266,9 @@ theme_override_styles/pressed_mirrored = ExtResource("7_6d356")
 theme_override_styles/pressed = ExtResource("7_6d356")
 theme_override_styles/normal_mirrored = ExtResource("7_6d356")
 theme_override_styles/normal = ExtResource("7_6d356")
-text = "Play Again"
+text = "Start Game"
 
-[node name="QuitButton" type="Button" parent="UserInterface/Control/VBoxContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="UserInterface/MainMenu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = ExtResource("7_6d356")
@@ -286,13 +284,12 @@ theme_override_styles/normal_mirrored = ExtResource("7_6d356")
 theme_override_styles/normal = ExtResource("7_6d356")
 text = "Quit"
 
-[node name="Space2" type="Control" parent="UserInterface/Control/VBoxContainer"]
+[node name="Space2" type="Control" parent="UserInterface/MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[connection signal="status_changed" from="." to="CameraController" method="_on_game_status_changed"]
 [connection signal="body_entered" from="Level/P1ScoreArea" to="." method="_on_p_1_score_area_body_entered"]
 [connection signal="body_entered" from="Level/P2ScoreArea" to="." method="_on_p_2_score_area_body_entered"]
-[connection signal="pressed" from="UserInterface/Control/VBoxContainer/VBoxContainer/PlayAgainButton" to="." method="_restart"]
-[connection signal="pressed" from="UserInterface/Control/VBoxContainer/VBoxContainer/QuitButton" to="." method="_quit"]
+[connection signal="pressed" from="UserInterface/MainMenu/VBoxContainer/VBoxContainer/PlayButton" to="." method="_restart"]
+[connection signal="pressed" from="UserInterface/MainMenu/VBoxContainer/VBoxContainer/QuitButton" to="." method="_quit"]
