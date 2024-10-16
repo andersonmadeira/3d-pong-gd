@@ -19,6 +19,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Generates a random
 func _reset() -> void:
+	visible = true
+
 	global_position.z = 0
 	global_position.x = 0
 
@@ -46,6 +48,5 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		_velocity = _velocity.bounce(collision.get_normal())
 
-func destroy() -> void:
-	print('ah!!')
-	_reset()
+func _destroy() -> void:
+	visible = false

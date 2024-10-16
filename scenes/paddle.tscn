@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddxfgti0l485o"]
+[gd_scene load_steps=5 format=3 uid="uid://ddxfgti0l485o"]
 
 [ext_resource type="Material" uid="uid://dqyrnk2rssj8" path="res://materials/white_material.tres" id="1_mo886"]
 [ext_resource type="Script" path="res://scripts/paddle.gd" id="1_pj2fk"]
-[ext_resource type="PackedScene" uid="uid://blo0h8pymkyiw" path="res://scenes/score_area.tscn" id="3_8tr76"]
-[ext_resource type="PackedScene" uid="uid://oh8kgo8pkwpt" path="res://scenes/score_ui.tscn" id="4_0qxk3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7m0m4"]
 size = Vector3(8, 1, 1)
@@ -14,6 +12,9 @@ size = Vector3(8, 1, 1)
 [node name="Paddle" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_pj2fk")
+move_up_action = null
+move_down_action = null
+speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_7m0m4")
@@ -21,11 +22,3 @@ shape = SubResource("BoxShape3D_7m0m4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_b46pc")
 surface_material_override/0 = ExtResource("1_mo886")
-
-[node name="ScoreArea" parent="." instance=ExtResource("3_8tr76")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
-top_level = true
-
-[node name="ScoreUI" parent="." instance=ExtResource("4_0qxk3")]
-
-[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

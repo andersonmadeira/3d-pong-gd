@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bh8wwbvjdhxqj"]
+[gd_scene load_steps=20 format=3 uid="uid://bh8wwbvjdhxqj"]
 
 [ext_resource type="PackedScene" uid="uid://ddxfgti0l485o" path="res://scenes/paddle.tscn" id="1_4guxq"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_beint"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://scenes/ball.gd" id="2_8mrv3"]
 [ext_resource type="Material" uid="uid://dqyrnk2rssj8" path="res://materials/white_material.tres" id="2_ed052"]
 [ext_resource type="Material" uid="uid://4oeq23eefftj" path="res://scenes/gray_material.tres" id="3_8xjim"]
+[ext_resource type="PackedScene" uid="uid://blo0h8pymkyiw" path="res://scenes/score_area.tscn" id="6_7plvg"]
+[ext_resource type="StyleBox" uid="uid://c3vucvnrhb8js" path="res://resources/button_normal_style.tres" id="7_6d356"]
+[ext_resource type="PackedScene" uid="uid://oh8kgo8pkwpt" path="res://scenes/score_ui.tscn" id="7_xrgop"]
 
 [sub_resource type="Sky" id="Sky_lpvbp"]
 
@@ -37,8 +40,16 @@ metallic_specular = 0.23
 [sub_resource type="BoxMesh" id="BoxMesh_k6dxl"]
 size = Vector3(1, 0.1, 1)
 
+[sub_resource type="Gradient" id="Gradient_jpvhw"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.337255, 0.337255, 0.337255, 0.490196)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p3qfb"]
+gradient = SubResource("Gradient_jpvhw")
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_sdrpa")
+win_score = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lidns")
@@ -82,27 +93,31 @@ shape = SubResource("BoxShape3D_e4g8o")
 mesh = SubResource("BoxMesh_6rryo")
 surface_material_override/0 = ExtResource("2_ed052")
 
-[node name="Paddle1" parent="Level" instance=ExtResource("1_4guxq")]
+[node name="P1Paddle" parent="Level" instance=ExtResource("1_4guxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
 move_up_action = "p1_move_up"
 move_down_action = "p1_move_down"
+speed = null
 
-[node name="ScoreArea" parent="Level/Paddle1" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -25.5)
+[node name="P1ScoreUI" parent="Level" instance=ExtResource("7_xrgop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 29.5)
 
-[node name="ScoreUI" parent="Level/Paddle1" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 29)
+[node name="P1ScoreArea" parent="Level" instance=ExtResource("6_7plvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -26)
+top_level = true
 
-[node name="Paddle2" parent="Level" instance=ExtResource("1_4guxq")]
+[node name="P2Paddle" parent="Level" instance=ExtResource("1_4guxq")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -23.5)
 move_up_action = "p2_move_up"
 move_down_action = "p2_move_down"
+speed = null
 
-[node name="ScoreArea" parent="Level/Paddle2" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 25.5)
+[node name="P2ScoreUI" parent="Level" instance=ExtResource("7_xrgop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -30)
 
-[node name="ScoreUI" parent="Level/Paddle2" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -29.5)
+[node name="P2ScoreArea" parent="Level" instance=ExtResource("6_7plvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 26)
+top_level = true
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0.5, 0)
@@ -187,5 +202,96 @@ mesh = SubResource("BoxMesh_k6dxl")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_8xjim")
 
-[editable path="Level/Paddle1"]
-[editable path="Level/Paddle2"]
+[node name="UserInterface" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="UserInterface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_p3qfb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/Control"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -148.5
+offset_right = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Space3" type="Control" parent="UserInterface/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="PlayerWonLabel" type="Label" parent="UserInterface/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Player % Won"
+
+[node name="Space" type="Control" parent="UserInterface/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayAgainButton" type="Button" parent="UserInterface/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("7_6d356")
+theme_override_styles/disabled_mirrored = ExtResource("7_6d356")
+theme_override_styles/disabled = ExtResource("7_6d356")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_6d356")
+theme_override_styles/hover_pressed = ExtResource("7_6d356")
+theme_override_styles/hover_mirrored = ExtResource("7_6d356")
+theme_override_styles/hover = ExtResource("7_6d356")
+theme_override_styles/pressed_mirrored = ExtResource("7_6d356")
+theme_override_styles/pressed = ExtResource("7_6d356")
+theme_override_styles/normal_mirrored = ExtResource("7_6d356")
+theme_override_styles/normal = ExtResource("7_6d356")
+text = "Play Again"
+
+[node name="QuitButton" type="Button" parent="UserInterface/Control/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("7_6d356")
+theme_override_styles/disabled_mirrored = ExtResource("7_6d356")
+theme_override_styles/disabled = ExtResource("7_6d356")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_6d356")
+theme_override_styles/hover_pressed = ExtResource("7_6d356")
+theme_override_styles/hover_mirrored = ExtResource("7_6d356")
+theme_override_styles/hover = ExtResource("7_6d356")
+theme_override_styles/pressed_mirrored = ExtResource("7_6d356")
+theme_override_styles/pressed = ExtResource("7_6d356")
+theme_override_styles/normal_mirrored = ExtResource("7_6d356")
+theme_override_styles/normal = ExtResource("7_6d356")
+text = "Quit"
+
+[node name="Space2" type="Control" parent="UserInterface/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[connection signal="body_entered" from="Level/P1ScoreArea" to="." method="_on_p_1_score_area_body_entered"]
+[connection signal="body_entered" from="Level/P2ScoreArea" to="." method="_on_p_2_score_area_body_entered"]
+[connection signal="pressed" from="UserInterface/Control/VBoxContainer/VBoxContainer/PlayAgainButton" to="." method="_restart"]
+[connection signal="pressed" from="UserInterface/Control/VBoxContainer/VBoxContainer/QuitButton" to="." method="_quit"]
