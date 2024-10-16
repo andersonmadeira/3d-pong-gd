@@ -15,13 +15,16 @@ Core:
 Polish:
 
 [ ] Increase ball speed as it hits the paddles
-[ ] Create a polished scenario / level inspired by a real (but stylized) pong game
-[ ] The score would be on a LED on the wall beside the paddle
 [ ] Simple particle effect when the ball hits the paddle
-[ ] Camera shake when the ball hits paddles or walls?
+[ ] Camera shake when the ball hits paddles or walls
+[ ] Make score area "redish" or some sort of visual indication of danger
 [ ] Simple particle effect when the ball hits the score area
-[ ] Make score area "redish" or some sort of visual indication of danger?
+[ ] Ball being destroyed when going through the score area
 [ ] Sound:
 [ ] Ball hitting wall
 [ ] Ball hitting paddles
-[ ] Ball being destroyed when going through the score area
+
+Extra:
+
+[ ] Create a polished scenario / level inspired by a real (but stylized) pong game
+[ ] The score would be on a LED on the wall beside the paddle
