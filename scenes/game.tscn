@@ -291,6 +291,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
+[connection signal="status_changed" from="." to="CameraController" method="_on_game_status_changed"]
 [connection signal="body_entered" from="Level/P1ScoreArea" to="." method="_on_p_1_score_area_body_entered"]
 [connection signal="body_entered" from="Level/P2ScoreArea" to="." method="_on_p_2_score_area_body_entered"]
 [connection signal="pressed" from="UserInterface/Control/VBoxContainer/VBoxContainer/PlayAgainButton" to="." method="_restart"]

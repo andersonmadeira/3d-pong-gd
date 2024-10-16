@@ -43,6 +43,7 @@ func _on_p_2_score_area_body_entered(body: Node3D) -> void:
 func _finish(player_id: String) -> void:
 	playerWonLabel.text = "%s WON!" % player_id
 	ui.visible = true
+	status_changed.emit(GameStatus.Paused)
 
 func _restart() -> void:
 	p1ScoreUI._reset()
@@ -50,6 +51,7 @@ func _restart() -> void:
 	ui.visible = false
 	await get_tree().create_timer(0.5).timeout
 	ball._reset()
+	status_changed.emit(GameStatus.Playing)
 
 func _quit() -> void:
 	get_tree().quit()
