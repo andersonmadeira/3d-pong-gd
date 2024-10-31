@@ -76,6 +76,7 @@ fov = 40.0
 [node name="Level" type="Node3D" parent="."]
 
 [node name="Ball" type="CharacterBody3D" parent="Level"]
+physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_8mrv3")
 
@@ -94,7 +95,7 @@ mesh = SubResource("BoxMesh_6rryo")
 surface_material_override/0 = ExtResource("2_ed052")
 
 [node name="P1Paddle" parent="Level" instance=ExtResource("1_4guxq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 23.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 22.5)
 move_up_action = "p1_move_up"
 move_down_action = "p1_move_down"
 
@@ -102,11 +103,11 @@ move_down_action = "p1_move_down"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 29.5)
 
 [node name="P1ScoreArea" parent="Level" instance=ExtResource("6_7plvg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -26)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -25.5)
 top_level = true
 
 [node name="P2Paddle" parent="Level" instance=ExtResource("1_4guxq")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -23.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228e-08, 0.5, -22.5)
 move_up_action = "p2_move_up"
 move_down_action = "p2_move_down"
 
@@ -114,7 +115,7 @@ move_down_action = "p2_move_down"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -30)
 
 [node name="P2ScoreArea" parent="Level" instance=ExtResource("6_7plvg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 26)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 25.5)
 top_level = true
 
 [node name="Wall1" type="CSGBox3D" parent="Level"]
